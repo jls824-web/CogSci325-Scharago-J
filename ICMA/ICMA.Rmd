@@ -1,0 +1,16 @@
+---
+title: "D2M ICMA Notebook"
+output: html_notebook
+author: "Jacob Scharago"
+date:"2026-09-03"
+---
+
+# Introduction
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+## Subheading
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+plot(cars)
+```
+I notice that distance increases with speed and that most inidviduals are scattered between 10-20
