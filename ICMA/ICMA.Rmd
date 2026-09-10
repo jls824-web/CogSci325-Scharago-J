@@ -5,12 +5,37 @@ author: "Jacob Scharago"
 date:"2026-09-03"
 ---
 
-# Introduction
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
-## Subheading
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+```{r}
+#/ label: setup
+#/ include: false
+
+library("tidyverse")
+library("palmerpenguins")
+```
+
+# ICMA 9-10-2026
 
 ```{r}
+ggplot(data=penguins, mapping = aes(x= flipper_length_mm,
+                                    y= bill_length_mm)) + 
+  geom_point()
+```
+
+```{r}
+PlantGrowth
+ggplot(data=PlantGrowth,
+       mapping=aes(y=weight,x=group)) +
+  geom_point(alpha=0.5) + 
+  stat_summary(geom= "pointrange",
+               fun.dat= "mean_se",
+               color="purple")
+```
+Yes, this is tidy data
+
+# ICMA 9-3-2026
+
 plot(cars)
 ```
+
+
 I notice that distance increases with speed and that most inidviduals are scattered between 10-20
