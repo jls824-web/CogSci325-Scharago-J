@@ -4,13 +4,46 @@ output: html_notebook
 author: "Jacob Scharago"
 date:"2026-09-03"
 ---
-
+# ICMA 9-15-2026
 ```{r}
-#/ label: setup
-#/ include: false
+PlantGrowth |>
+  ggplot(aes(y = weight,x = group)) +
+  geom_boxplot(width = 0.2)
+```
+```{r}
+install.packages("nycflights13")
+library(nycflights13)
+glimpse(flights)
 
-library("tidyverse")
-library("palmerpenguins")
+flights |> 
+  filter(month == 1)
+
+flights |> 
+  filter(month == 1 & day == 1)
+
+flights |> 
+  arrange(year, month, day, dep_time)
+
+flights |> 
+  arrange(desc(month))
+```
+```{r}
+i < flights |> 
+filter(arr_delay > 120 & dep_delay <= 0) 
+  arrange(dep_delay)
+  
+j < flights |> 
+  arrange(dep_delay) |> 
+  filter(arr_delay > 120 & dep_delay <= 0) 
+
+all(i==j)
+```
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+library(palmerpenguins)
 ```
 
 # ICMA 9-10-2026
