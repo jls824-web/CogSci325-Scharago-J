@@ -4,6 +4,100 @@ output: html_notebook
 author: "Jacob Scharago"
 date:"2026-09-03"
 ---
+
+# ICMA 9-17-2026
+```{r}
+install.packages("nycflights13")
+library(nycflights13)
+flights <- nycflights13::flights
+glimpse(flights)
+flights |> 
+  # distance is miles, time is minutes
+  # convert to miles/hour using *60
+  mutate(speed = distance/air_time * 60,
+       .before = 1) |> 
+head()
+
+flights |> 
+  mutate(speed = distance/air_time * 60,
+       .after = distance) |> 
+  glimpse()
+
+flights |> 
+  select(year, month, day, contains("dep"))
+
+flights |> 
+  mutate(speed = distance/air_time * 60,
+       .after = distance) |> 
+   select(year, month, day,
+          dep_time, air_time, distance, speed)
+
+flights |> 
+  mutate(speed = distance/air_time * 60,
+       .after = distance) |> 
+   select(year, month, day,how_fast=speed)
+
+flights |> 
+  rename(dep_airport = origin,
+         arr_airport = dest)
+
+flights |> 
+  relocate(carrier,
+           .after = day)
+
+flights |> 
+  group_by(month) |> 
+  head()
+
+flights |> 
+  group_by(month) |> 
+  count()
+
+flights |> 
+  group_by(month) |> 
+  summarise(avg_delay = mean(dep_delay))
+
+flights |> 
+  group_by(month) |> 
+  summarise(avg_delay = mean(dep_delay,
+                             na.rm = TRUE)) |> round(2)
+
+flights |> 
+  group_by(month, day) |> 
+  count()
+
+flights_grouped <- flights |> 
+  group_by(month)
+
+flights_grouped |> 
+  count()
+
+flights |> 
+  count()
+
+flights_grouped |> 
+  ungroup()
+
+flights |> 
+  group_by(month) |> 
+  slice_max(dep_delay, n = 2)
+```
+```{r}
+flights |> 
+  group_by(month) |> 
+  summarize(mean_delay = mean(arr_delay, na.rm = TRUE),
+            sd_delay = sd(arr_delay, na.rm = TRUE),
+            number_late = sum (dep_delay > 0, na.rm = TRUE),
+            total_number = n()) |> 
+  mutate(percentage = number_late/total_number) |> 
+  ggplot(aes(y = percentage, x = month)) +
+  geom_line() +
+scale_x_continuous(breaks = 1:12) +
+  ylim(0, 0.55)
+```
+
+
+
 # ICMA 9-15-2026
 ```{r}
 PlantGrowth |>
@@ -13,6 +107,7 @@ PlantGrowth |>
 ```{r}
 install.packages("nycflights13")
 library(nycflights13)
+flights <- nycflights13::flights
 glimpse(flights)
 
 flights |> 
