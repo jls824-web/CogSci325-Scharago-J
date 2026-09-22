@@ -5,6 +5,26 @@ author: "Jacob Scharago"
 date:"2026-09-03"
 ---
 
+# ICMA 9-22-2026
+```{r}
+`1number` <- 12
+`%number` <- 12
+`num ber` <- 12
+
+print(`1number`)
+
+print(`%number`)
+
+print(`num ber`)
+```
+```{r}
+library(nycflights13)
+delay_summary <- flights |> 
+  group_by(tailnum) |> 
+  summarize(mean_delay = mean(arr_delay, na.rm = TRUE),
+            n_flights = n())
+```
+
 # ICMA 9-17-2026
 ```{r}
 install.packages("nycflights13")
