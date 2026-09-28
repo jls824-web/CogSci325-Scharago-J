@@ -5,6 +5,73 @@ author: "Jacob Scharago"
 date:"2026-09-03"
 ---
 
+# ICMA 9-24-2026
+```{r}
+library(tidyverse)
+head(billboard)
+billboard |> 
+  pivot_longer(cols = wk1:wk76,
+               names_to = "week",
+               values_to = "rank") |> 
+  head(10)
+```
+```{r}
+billboard_long <- billboard |>
+  pivot_longer(cols = wk1:wk76,
+                names_to = "week",
+                values_to = "rank")
+
+billboard |> 
+  filter(track == "Baby Don't Cry (Keep...")
+
+
+billboard_long |> 
+  filter(track == "Baby Don't Cry (Keep..." & week == "wk8")
+
+billboard_long_dropna <- billboard |> 
+  pivot_longer(cols = wk1:wk76,
+               names_to = "week",
+               values_to = "rank",
+               values_drop_na = TRUE)
+
+billboard_long_dropna |> 
+  filter(track == "Baby Don't Cry (Keep..." & week == "wk8")
+```
+```{r}
+head(billboard_long_dropna)
+
+billboard_long_dropna %>%
+  pivot_wider(names_from = week,
+              values_from = rank)
+
+?pivot_longer
+
+billboard |> 
+  pivot_longer(cols = wk1:wk76,
+               names_to = "week",
+               names_prefix = "wk",
+               values_to = "rank",
+               values_drop_na = TRUE)
+
+billboard |> 
+  pivot_longer(cols = starts_with ("wk"),
+               names_to = "week",
+               names_prefix = "wk",
+               values_to = "rank",
+               values_drop_na = TRUE)
+
+billboard |> 
+  separate(col = date.entered,
+           into = c("year", "month", "day"),
+           sep = "_"
+           ) |> 
+  unite(col = date_entered,
+        year:day,
+        sep = "_",
+        remove = TRUE
+        )
+```
+
 # ICMA 9-22-2026
 ```{r}
 `1number` <- 12
