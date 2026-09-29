@@ -5,6 +5,11 @@ author: "Jacob Scharago"
 date:"2026-09-03"
 ---
 
+#ICMA 9-29-2026
+```{r}
+read_csv("Week5-1_ClassData.csv")
+```
+
 # ICMA 9-24-2026
 ```{r}
 library(tidyverse)
