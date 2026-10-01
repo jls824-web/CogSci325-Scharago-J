@@ -5,3 +5,35 @@ author: "Jacob Scharago"
 date:"2026-010-01"
 ---
 
+# ICMA 10-1-2026 
+```{r}
+library(tidyverse)
+```
+
+```{r}
+setwd("~/Desktop/CogSci325-Scharago-J/Data_Exercise1")
+read_csv("Bats_Balls_2025-10-02.csv")
+
+data <- data |> filter(DistributionChannel == 'anonymous' & Finished == 'TRUE')
+data
+```
+```{r}
+setwd("~/Desktop/CogSci325-Scharago-J/Data_Exercise1")
+read_csv("Bats_Balls_2025-10-02.csv") |> 
+  filter(DistributionChannel == 'anonymous' & Progress == "100") |> 
+  rename (
+    subject_id = ResponseId,
+    date = EndDate,
+    cost_pencil_control = 'Pencil Control',
+    cost_magazine_control = Magazine_Control,
+    cost_magazine_standard = 'Magazine Standard',
+    cost_pencil_standard = Pencil_Standard
+  )
+
+data
+
+data_cost <- data |> 
+  select(subject_id, date,
+         contains("cost"))
+data_cost
+```
