@@ -4,8 +4,16 @@ output: html_notebook
 author: "Jacob Scharago"
 date:"2026-09-03"
 ---
+# ICMA 10-1-2026
+```{r}
+read_csv("Week5-1_ClassData.csv",
+                       col_types = list(bonusPayment = col_number()),
+                       na = c("N/A", ".")) |> 
+  rename(bonus_payment = bonusPayment)
 
-#ICMA 9-29-2026
+```
+
+# ICMA 9-29-2026
 ```{r}
 read_csv("Week5-1_ClassData.csv")
 ```
