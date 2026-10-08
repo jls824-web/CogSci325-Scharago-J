@@ -4,6 +4,46 @@ output: html_notebook
 author: "Jacob Scharago"
 date:"2026-09-03"
 ---
+# ICMA 10-8-2026
+
+## Slides 15 - 16 (Include the following in your ICMA file)
+
+ICMA question: what's the difference between these two code chunks? Are the outputs the same?
+**Answer here**: The difference between the two code chunks are that the first chunk is adding the term "mapping" to the aesthetic layer whereas the second code chunk is just utilizing the aesthetic function without the mapping feature but both outcomes are the same because the aesthetic automatically maps variables to graph features.
+
+
+```{r}
+mpg |> 
+  ggplot(mapping = aes(y = hwy, x = displ, color = manufacturer)) + 
+  geom_point()
+```
+```{r}
+mpg |> 
+  ggplot(aes(y = hwy, x = displ, color = manufacturer)) + 
+  geom_point()
+```
+
+## Slide 19 (Include the following in your ICMA file)
+
+ICMA question: what are these warnings about and why should we worry about them?
+**Answer**: The warnings are about the fact that R only offers 6 default shapes for distinct values in a variable, which is not conducive to the presentation of the data, as it's not very interpretable. Additionally, if the shapes cannot map onto to specific values, it drops them, leaving them out of the graph.
+
+```{r}
+mpg |> 
+  ggplot(aes(y = hwy, x = displ, shape = manufacturer)) + 
+  geom_point()
+```
+# Slide 42 (Include in ICMA)
+
+Change the color of the line to something other than the default blue
+
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point(aes(color = class)) + 
+  geom_smooth(color = 'black')
+```
+
+
 # ICMA 10-1-2026
 ```{r}
 read_csv("Week5-1_ClassData.csv",
