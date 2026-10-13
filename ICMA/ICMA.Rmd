@@ -4,6 +4,94 @@ output: html_notebook
 author: "Jacob Scharago"
 date:"2026-09-03"
 ---
+# ICMA 10-13-2026
+
+# Slide 29 (Add these to your ICMA file)
+
+
+```{r}
+ggplot(mpg,aes(x=drv,fill=class)) +
+  geom_bar(position='stack')
+
+ggplot(mpg,aes(x=drv,fill=class)) +
+  geom_bar(position='dodge')
+
+ggplot(mpg,aes(x=drv,fill=class)) +
+  geom_bar(position='fill')
+```
+# Slides 32 - 33 (Add these to your ICMA file)
+
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(position = 'jitter')
+```
+
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_jitter(width = 0.05, height = 0.05)
+```
+# Exercise: facet_grid (put this section in your ICMA file)
+
+We want to add a facet using `facet_grid` that presents `drv` as rows and `cyl` as columns.
+
+Do that below (if you need a hint, look at the supplement for Slide 14)
+
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point() +
+  facet_grid(drv~cyl)
+```
+
+Let's play with the x and y scales. First, call up the facet_grid documentation.
+
+```{r}
+?facet_grid
+```
+
+What does the "scales" option do and what values does it take?
+
+Checks scales across all facets  including whether they vary across rows, columns, or both.
+
+WRITE YOUR ANSWER HERE.
+
+Below, experiment with facet_grid option, `scales = "free_x"`, `scales = "free_y"`, and `scales = 'free'`, and `scales = 'fixed'`.  Compare with the code chunk above without scales being specified
+
+
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point() +  
+  facet_grid(drv ~ cyl,scales= "free_x")
+
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point() +  
+  facet_grid(drv ~ cyl, scales= "fixed")
+
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point() +  
+  facet_grid(drv ~ cyl, scales= "free")
+
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point() +  
+  facet_grid(drv ~ cyl, scales= "free_y")
+
+
+```
+
+Answer the following questions:
+
+What effect does each option have on the plot?
+
+It allows different parts of the data to be highlighted.
+
+Why might you want to use one of these options?
+
+Depending on the option, it's easier to visually compare clumps of data.
+
+What is the default `scales` value?
+
+A fixed value
+
+
 # ICMA 10-8-2026
 
 ## Slides 15 - 16 (Include the following in your ICMA file)
