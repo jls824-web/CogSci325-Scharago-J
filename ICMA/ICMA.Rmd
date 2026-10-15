@@ -4,6 +4,28 @@ output: html_notebook
 author: "Jacob Scharago"
 date:"2026-09-03"
 ---
+# ICMA 10-15-2026
+
+# ICMA Exercise: faceted histograms
+
+Using the `diamonds` dataset, create 2 plots.
+
+1. A plot showing a histogram of diamond price
+2. A plot showing a histogram of diamond price, **faceted** by color and cut
+
+Choose a suitable bin width for your histogram(s). What influenced your choice?
+
+```{r}
+ggplot(diamonds, aes(x = price)) + 
+  geom_histogram(binwidth = 0.2)
+```
+
+```{r}
+ggplot(diamonds, aes(x = price)) + 
+  geom_histogram(binwidth = 500) +
+    facet_grid(color ~ cut)
+```
+
 # ICMA 10-13-2026
 
 # Slide 29 (Add these to your ICMA file)
