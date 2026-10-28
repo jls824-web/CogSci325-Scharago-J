@@ -4,6 +4,67 @@ output: html_notebook
 author: "Jacob Scharago"
 date:"2026-09-03"
 ---
+# 10-27-2026
+## ICMA Exercise 1
+
+Let's go back to using our `str_` functions on our `fruit` dataset but this time we'll use more complex regular expressions
+
+- filter to keep only names that begin with the letter f
+```{r}
+str_subset(fruit, "^f")
+```
+- filter to keep only names that begin or end with the letter a
+```{r}
+str_subset(fruit, "^a|a$")
+```
+- filter to keep only names that start with a vowel
+```{r}
+str_subset(fruit, "^[aeiou]")
+```
+- filter to keep only names that start with a consonant, followed by a vowel
+```{r}
+str_subset(fruit, "^[^aeiou][aeiou]")
+```
+
+## ICMA Exercise 2:
+
+What do these regexes mean? Use words to describe the meaning, then check in R by applying it to the `fruit` vector, `words` vector, or the `babynames` dataset 
+
+- `^.*$`
+Matches an entire string from its beginning to its end, and allows any number of characters
+```{r}
+str_subset(fruit, "^.*$")
+```
+- `[abcdefg]+`
+Matches one or more consecutive characters that are any of those lowercase letters
+```{r}
+str_subset(fruit, "[abcdefg]+")
+```
+- `[abcdefg][zyxwvuts]`
+Matches two consecutive characters but the the first must be a letter from a through g, and the second must be a letter from s through z
+```{r}
+str_subset(fruit, "[abcdefg][zyxwvuts]")
+```
+- `\..\..\..`
+Matches three repetitions of a literal period that's followed by any single character. The backlash makes the period literal.
+```{r}
+str_subset(fruit, "\\..\\..\\..")
+```
+- `(.)\1\1\1`
+Matches instances of the same character. Collects any single character as well as any that appear again
+```{r}
+str_subset(fruit, "(.)\\1\\1\\1")
+```
+- `(.)[a-z](.).*\2\1`
+Collects any first character, followed by any letter, followed by any second character. It allows any characters before requiring the second character followed by the first character at the end of the string.
+```{r}
+str_subset(distinct_baby_names, "(.)[a-z](.).*\2\1")
+```
+NOTE: if using babynames, use the distinct_baby_names vector we created before or filter the babynames dataset for years > 2000
+
+NOTE: when applying these remember that `\1` needs to be converted to `\\1` when it appears within in quotation marks (" ")
+
+
 # 10-22-2026
 # ICMA Exercise: annotate (see code chunk for slide 27)
 
