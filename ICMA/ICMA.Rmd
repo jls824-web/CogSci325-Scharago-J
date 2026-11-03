@@ -4,6 +4,115 @@ output: html_notebook
 author: "Jacob Scharago"
 date:"2026-09-03"
 ---
+
+# 11-3-2026
+
+## ICMA 3
+```{r}
+flights |> 
+  group_by(year, month, day) |> 
+  summarize(
+    proportion_delayed = mean(dep_delay <= 60, na.rm = TRUE),
+    count_long_delay = sum(arr_delay >= 300, na.rm = TRUE),
+    .groups = "drop"
+  )
+```
+# ICMA 5
+
+Create the trials table by running the chunk below:
+
+```{r}
+trials <- tribble(
+  ~participant, ~trial, ~condition, ~response, ~correct, ~rt_ms, ~confidence,
+  "P01",            1, "match",     "yes",    TRUE,       420, "80%",
+  "P01",            2, "mismatch",  "no",     TRUE,       610, "90%",
+  "P01",            3, "match",     "no",     FALSE,      280, "60%",
+  "P01",            4, "mismatch",  NA,       NA,          NA, NA,
+  "P01",            5, "match",     "yes",    TRUE,       390, "85%",
+  "P01",            6, "mismatch",  "yes",    FALSE,      950, "55%",
+  "P01",            7, "match",     "yes",    TRUE,       420, "90%",
+  "P01",            8, "mismatch",  "no",     TRUE,      1500, "70%",
+
+  "P02",            1, "match",     "yes",    TRUE,       510, "75%",
+  "P02",            2, "mismatch",  "yes",    FALSE,      510, "50%",
+  "P02",            3, "match",     "yes",    TRUE,      2400, "95%",
+  "P02",            4, "mismatch",  "no",     TRUE,       730, "85%",
+  "P02",            5, "match",     "no",     FALSE,      300, "40%",
+  "P02",            6, "mismatch",  "no",     TRUE,       680, "80%",
+  "P02",            7, "match",     "yes",    TRUE,       460, "90%",
+  "P02",            8, "mismatch",  "yes",    FALSE,     1650, "65%",
+
+  "P03",            1, "match",     "yes",    TRUE,       190, "70%",
+  "P03",            2, "mismatch",  "no",     TRUE,       640, "80%",
+  "P03",            3, "match",     NA,       NA,          NA, NA,
+  "P03",            4, "mismatch",  "yes",    FALSE,     1200, "40%",
+  "P03",            5, "match",     "yes",    TRUE,       560, "85%",
+  "P03",            6, "mismatch",  "no",     TRUE,       640, "90%",
+  "P03",            7, "match",     NA,       NA,          NA, NA,
+  "P03",            8, "mismatch",  "yes",    FALSE,      890, "55%",
+
+  "P04",            1, "match",     "yes",    TRUE,       350, "95%",
+  "P04",            2, "mismatch",  "no",     TRUE,       480, "90%",
+  "P04",            3, "match",     "yes",    TRUE,       300, "85%",
+  "P04",            4, "mismatch",  "no",     TRUE,       600, "80%",
+  "P04",            5, "match",     "yes",    TRUE,       350, "90%",
+  "P04",            6, "mismatch",  NA,       NA,          NA, NA,
+  "P04",            7, "match",     "yes",    TRUE,       450, "95%",
+  "P04",            8, "mismatch",  "no",     TRUE,       600, "85%",
+
+  "P05",            1, "match",     "yes",    TRUE,       250, "60%",
+  "P05",            2, "mismatch",  "yes",    FALSE,      800, "45%",
+  "P05",            3, "match",     "no",     FALSE,      220, "50%",
+  "P05",            4, "mismatch",  NA,       NA,          NA, NA,
+  "P05",            5, "match",     "yes",    TRUE,      1800, "75%",
+  "P05",            6, "mismatch",  "no",     TRUE,       720, "80%",
+  "P05",            7, "match",     "no",     FALSE,     1100, "35%",
+  "P05",            8, "mismatch",  "yes",    FALSE,     1600, "55%"
+)
+```
+
+## 5.1
+
+Use mutate() to add the following variables to the trials table
+- has_response: whether a response was recorded.
+- too_fast: whether reaction time is strictly below 300 ms.
+- too_slow: whether reaction time is strictly above 1500 ms.
+- in_range: whether reaction time is between 300 and 1500 ms, including both endpoints.
+
+```{r}
+trials <- trials |> mutate (
+  has_response = !is.na(response),
+  too_fast = rt_ms < 300,
+  too_slow = rt_ms > 1500,
+  in_range = rt_ms >= 300 & rt_ms <=1500
+)
+trials |> filter(has_response)
+```
+
+## 5.2
+
+create a bar plot showing either the count or proportion of trials that are true or false, by condition
+
+```{r}
+trials |> 
+  group_by(condition) |> 
+  summarise(count_correct = sum(correct, na.rm = TRUE)
+)
+```
+
+# Use any() and all()
+
+For each participant, calculate whether: 
+- Any response is missing.
+- Any recorded answer is incorrect.
+- All recorded answers are correct.
+- All match trials have known, correct answers.
+
+```{r}
+trials |> group_by(participant) |> 
+  summarise(any_missing = all(!is.na(rt_ms)))
+```
+
 # 10-29-2026
 ```{r}
 x <- c("Turing, Alan", "Lovelace, Ada", "Fodor, Jerry")
