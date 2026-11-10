@@ -4,6 +4,47 @@ output: html_notebook
 author: "Jacob Scharago"
 date:"2026-09-03"
 ---
+# 11-10-2026
+## ICMA 1
+
+Then, rewrite our original mutate() call with the new function
+
+```{r}
+df |> mutate(
+  a = rescale01(a),
+  b = rescale01(b),
+  c = rescale01(c),
+  d = rescale01(d),
+)
+```
+## ICMA 2
+
+Turn the below code snippets into a single function.
+
+To start, ask yourself what is each line trying to do, what is common across each line, and what varies?
+
+x / sum(x, na.rm = TRUE)
+y / sum(y, na.rm = TRUE)
+z / sum(z, na.rm = TRUE)
+
+
+```{r}
+prop <- function(x) {
+  x / sum(x, na.rm = TRUE)
+}
+prop(c(1, 2, 3))
+```
+## ICMA 3
+
+Using the nycflights database, create a summary table using `summarise` and `across` that shows the median and total number of missing values for the variables, `dep_delay` and `airtime`
+
+NOTE: You will need to pass the na.rm option to the functions you call in `summarise`!
+
+```{r}
+flights |> 
+  summarize(across(c(dep_delay, air_time), function (x) median(x, na.rm = TRUE)))
+  
+```
 
 # 11-3-2026
 
