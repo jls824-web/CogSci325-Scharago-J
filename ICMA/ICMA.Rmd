@@ -1,9 +1,52 @@
 ---
 title: "D2M ICMA Notebook"
-output: html_notebook
 author: "Jacob Scharago"
-date:"2026-09-03"
+date: "2026-09-03"
+  output:
+   word_document: default
+   pdf_document: default
+   html_document:
+      toc: true
+      toc_depth: 2
+      toc_float:
+      collapsed: false
+      smooth_scroll: false
 ---
+# 11-17-2026
+```{r}
+flights |> 
+  head(3) |> 
+  knitr::kable()
+```
+# ICMA 6:
+```{r}
+#| echo: false
+#| true: true
+#| fig-cap: "Chick weight over time"
+ChickWeight |> 
+  ggplot(aes(y= weight, x = Time, group = Chick)) +
+  geom_line()
+```
+
+#ICMA 5:
+
+```{r}
+d_mean_price <- diamonds |> summarise(mean_price = mean(price))
+```
+The **mean price** of *diamonds* is $'r round(d_mean_price)'
+
+# ICMA 4:
+
+**This is my R notebook**
+*This is my R notebook*
+^:notebook^2^<br>
+$:$A = \pi*r^{2}
+-This
+  -is
+  -my
+  -notebook
+
+
 # 11-12-2026
 
 # ICMA 1:
