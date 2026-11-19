@@ -1,0 +1,56 @@
+---
+title: "ICMA 11-19-2026"
+author: "Jacob Scharago"
+format: 
+  revealjs:
+    incremental: true
+    theme: sky
+editor: visual
+---
+
+```{r}
+library(ggplot2)
+```
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Bullets
+
+When you click **render** button a document will be generated that includes:
+
+::: nonincremental
+- Content authored with markdown
+- Output from executable code
+:::
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+# Data
+
+## cars
+
+This is horsepower as a function of displacement
+
+```{r}
+#| echo: true
+mtcars |> 
+  ggplot(aes(x=disp, y=hp)) +
+  geom_jitter()
+```
